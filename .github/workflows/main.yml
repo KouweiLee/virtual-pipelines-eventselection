@@ -44,9 +44,11 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
+        
       - uses: actions/download-artifact@v4
         with:
-          name: skim_latest
+          name: skim_6
+          
       - name: skim
         run: |
           chmod +x ./skim
