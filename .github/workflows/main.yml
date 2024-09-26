@@ -10,17 +10,10 @@ jobs:
   build_skim:
     needs: greeting
     runs-on: ubuntu-latest
-    continue-on-error: ${{ matrix.experimental }}
     container: rootproject/root:${{ matrix.version }}
     strategy:
       matrix:
-        version: [6.26.10-conda]
-        experimental: [false]
-        skim_name: [skim_6]
-        include: 
-          - version: latest
-            experimental: true
-            skim_name: skim_latest
+        version: [6.26.10-conda, latest]
 
     steps:
       - name: checkout repository
@@ -34,7 +27,7 @@ jobs:
       
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.skim_name }}
+          name: skim${{ matrix.version }}
           path: ./skim
   
   skim:
@@ -47,9 +40,9 @@ jobs:
         
       - uses: actions/download-artifact@v4
         with:
-          name: skim_6
+          name: skim6.26.10-conda
           
       - name: skim
         run: |
           chmod +x ./skim
-          ./skim
+          ./skim root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/GluGluToHToTauTau.root skim_ggH.root 19.6 11467.0 0.1
