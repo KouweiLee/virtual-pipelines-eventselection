@@ -85,9 +85,8 @@ jobs:
       
       - name: test
         run: |
-          cd tests/
-          python3 test_cutflow_ggH.py
-          python3 test_plot_ggH.py
+          python3 tests/test_cutflow_ggH.py
+          python3 tests/test_plot_ggH.py
       
 
 
